@@ -1,0 +1,158 @@
+module.exports = function (app) {
+    var session = require('express-session');
+    app.use(session({
+        resave: false,
+        saveUninitialized: true,
+        duration: 30 * 60 * 1000,
+        activeDuration: 30 * 60 * 1000,
+        secret: 'any string'
+    }));
+
+    var userModel =
+        require('./../models/user/user.model.server');
+
+    app.get('/api/user/', findAllUsers);
+    app.get('/api/user/:userId', findUserById);
+    app.post('/api/user/', createUser);
+    app.post('/api/login', login);
+    app.post('/api/register', register);
+    app.get('/api/profile', getProfile);
+    app.post('/api/logout', logout);
+    app.put('/api/profile', updateProfile);
+    app.delete('/api/profile', deleteUser);
+
+
+    function createUser(req, res) {
+        var user = req.body;
+        console.log(user);
+        userModel.createUser(user)
+            .then(function (status) {
+                res.send(status);
+            });
+    }
+
+    function findAllUsers(req, res) {
+        userModel.findAllUsers()
+            .then(function (user) {
+                res.send(user);
+            });
+    }
+
+    function findUserById(req, res) {
+        var userId = req.params['userId']
+        userModel.findUserById(userId)
+            .then(function (user) {
+                res.json(user);
+            });
+    }
+
+    function login(req, res) {
+        var user = req.body;
+        var username = user.username;
+        var password = user.password;
+        userModel.findUserByCredentials(username, password)
+            .then(function (u) {
+                console.log(u);
+                if(u!=null){
+                req.session['user'] = u;
+                res.send(u);}
+                else{
+                    res.send('not a valid id password');
+                }
+            });
+
+    }
+
+    function register(req, res) {
+        var user = req.body;
+        var username = user.username;
+        console.log(user);
+        console.log(username);
+        userModel.findUserByUsername(username).then(function (u) {
+            console.log(u);
+            if (u != null) {
+                res.send(false);
+            } else {
+                userModel.createUser(user).then(function (user) {
+
+                    req.session['user'] = user;
+                    res.send(true);
+                })
+            }
+        })
+
+    }
+
+    function getProfile(req, res) {
+        if (req.session && req.session['user']) {
+            res.json(req.session['user']);
+
+        } else {
+            res.send(null);
+        }
+
+    }
+
+    function updateProfile(req, res) {
+        if (req.session && req.session['user']) {
+            var user = req.session['user'];
+            var id = user._id;
+            console.log(id);
+            var newUser = req.body;
+            userModel.updateUser(id, newUser).then(
+                function (status) {
+                    id['_id'] = id
+                    req.session['user'] = newUser;
+                    res.send(status);
+                }
+            );
+
+        } else {
+            res.send(null);
+        }
+
+    }
+
+    function logout(req, res) {
+        if (req.session && req.session['user']) {
+            //delete req.session['user'];
+            req.session.destroy();
+            res.send('logged-out');
+
+        }
+        else {
+            res.send('no-session-exists');
+        }
+
+    }
+
+    function deleteUser(req,res){
+        if (req.session && req.session['user']) {
+             var id=req.session['user']._id;
+             userModel.deleteUser(id).then(function (status) {
+                 res.send(status);
+             })
+
+        }
+        else {
+            res.send('no-session-exists');
+        }
+
+    }
+
+
+    // function setSession(req, res) {
+    //     var name = req.params['name'];
+    //     var value = req.params['value'];
+    //     req.session[name] = value;
+    //     res.send(req.session);
+    // }
+    //
+    // function getSession(req, res) {
+    //     var name = req.params['name'];
+    //     var value = req.session[name];
+    //     res.send(value);
+    // }
+
+
+};
