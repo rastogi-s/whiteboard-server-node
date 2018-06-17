@@ -12,7 +12,10 @@ module.exports = {
     findSectionById: findSectionById,
     createSection: createSection,
     deleteSection: deleteSection,
-    updateSection: updateSection
+    updateSection: updateSection,
+    decrementSectionSeats: decrementSectionSeats,
+    incrementSectionSeats: incrementSectionSeats,
+
 };
 
 function findAllSections() {
@@ -30,7 +33,6 @@ function findSectionById(sectionId) {
 
 
 function createSection(section) {
-    console.log(section);
     return SectionModel.create(section);
 }
 
@@ -44,5 +46,20 @@ function updateSection(sectionId, newSection) {
 }
 
 
+function decrementSectionSeats(sectionId) {
+    return SectionModel.update({
+        _id: sectionId
+    }, {
+        $inc: {availableSeats: -1}
+    });
+}
+
+function incrementSectionSeats(sectionId) {
+    return SectionModel.update({
+        _id: sectionId
+    }, {
+        $inc: {availableSeats: +1}
+    });
+}
 
 

@@ -1,48 +1,30 @@
-// var mongoose =
-//     require('mongoose');
-// var SectionSchema =
-//     require('./enrollment.schema.server');
-// var SectionModel = mongoose
-//     .model('SectionModel', SectionSchema);
-//
-//
-// module.exports = {
-//     findAllSections: findAllSections,
-//     findAllSectionsForCourse: findAllSectionsForCourse,
-//     findSectionById: findSectionById,
-//     createSection: createSection,
-//     deleteSection: deleteSection,
-//     updateSection: updateSection
-// };
-//
-// function findAllSections() {
-//     return SectionModel.find();
-// }
-//
-// function findAllSectionsForCourse(courseId) {
-//     return SectionModel.find({courseId: courseId})
-// }
-//
-//
-// function findSectionById(sectionId) {
-//     return SectionModel.findById(sectionId);
-// }
-//
-//
-// function createSection(section) {
-//     console.log(section);
-//     return SectionModel.create(section);
-// }
-//
-// function deleteSection(sectionId) {
-//     return SectionModel.remove({_id: sectionId});
-// }
-//
-// function updateSection(sectionId, newSection) {
-//     return SectionModel.update({_id: sectionId},
-//         {$set: newSection})
-// }
-//
-//
-//
-//
+var mongoose =
+    require('mongoose');
+var EnrollmentSchema =
+    require('./enrollment.schema.server');
+var EnrollmentModel = mongoose
+    .model('EnrollmentModel', EnrollmentSchema);
+
+
+module.exports = {
+    enrollStudentInSection: enrollStudentInSection,
+    findAllSectionsForStudent: findAllSectionsForStudent,
+    removeStudentFromSection: removeStudentFromSection,
+
+};
+
+function enrollStudentInSection(sectionId, studentId) {
+    return EnrollmentModel.create({section:sectionId,student:studentId});
+}
+
+function findAllSectionsForStudent(studentId) {
+    return EnrollmentModel.find({student: studentId})
+}
+
+
+function removeStudentFromSection(sectionId,studentId) {
+    return EnrollmentModel.remove({section: sectionId,student:studentId});
+}
+
+
+

@@ -11,8 +11,11 @@ module.exports = function (app) {
     var sectionModel =
         require('./../models/section/section.model.server');
 
+
     app.get('/api/section/:sectionId', findSectionById);
     app.get('/api/course/:courseId/section', findAllSectionsForCourse);
+
+    // admin access
     app.post('/api/course/:courseId/section', createSection);
     app.put('/api/section/:sectionId', updateSection);
     app.delete('/api/section/:sectionId', deleteSection);
@@ -37,7 +40,8 @@ module.exports = function (app) {
     }
 
     function findSectionById(req, res) {
-        var sectionId = req.params['sectionId']
+        var sectionId = req.params['sectionId'];
+        console.log(sectionId);
         sectionModel.findSectionById(sectionId)
             .then(function (section) {
                 res.json(section);

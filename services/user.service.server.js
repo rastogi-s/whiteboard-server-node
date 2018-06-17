@@ -11,9 +11,12 @@ module.exports = function (app) {
     var userModel =
         require('./../models/user/user.model.server');
 
+    // admin access
     app.get('/api/user/', findAllUsers);
     app.get('/api/user/:userId', findUserById);
     app.post('/api/user/', createUser);
+
+    // users
     app.post('/api/login', login);
     app.post('/api/register', register);
     app.get('/api/profile', getProfile);
@@ -52,12 +55,15 @@ module.exports = function (app) {
         var password = user.password;
         userModel.findUserByCredentials(username, password)
             .then(function (u) {
-                console.log(u);
-                if(u!=null){
-                req.session['user'] = u;
-                res.send(u);}
-                else{
-                    res.send('not a valid id password');
+          //      console.log(u);
+                if (u != null) {
+
+            //        console.log(u);
+                    req.session['user'] = u;
+                    res.send(u);
+                }
+                else {
+                    res.send(null);
                 }
             });
 
@@ -66,17 +72,17 @@ module.exports = function (app) {
     function register(req, res) {
         var user = req.body;
         var username = user.username;
-        console.log(user);
-        console.log(username);
+        //console.log(user);
+        //console.log(username);
         userModel.findUserByUsername(username).then(function (u) {
             console.log(u);
             if (u != null) {
-                res.send(false);
+                res.json({status: false});
             } else {
                 userModel.createUser(user).then(function (user) {
-
+                    delete user.password;
                     req.session['user'] = user;
-                    res.send(true);
+                    res.json({status: true});
                 })
             }
         })
@@ -97,11 +103,11 @@ module.exports = function (app) {
         if (req.session && req.session['user']) {
             var user = req.session['user'];
             var id = user._id;
-            console.log(id);
+           // console.log(id);
             var newUser = req.body;
             userModel.updateUser(id, newUser).then(
                 function (status) {
-                    id['_id'] = id
+                    id['_id'] = id;
                     req.session['user'] = newUser;
                     res.send(status);
                 }
@@ -126,12 +132,12 @@ module.exports = function (app) {
 
     }
 
-    function deleteUser(req,res){
+    function deleteUser(req, res) {
         if (req.session && req.session['user']) {
-             var id=req.session['user']._id;
-             userModel.deleteUser(id).then(function (status) {
-                 res.send(status);
-             })
+            var id = req.session['user']._id;
+            userModel.deleteUser(id).then(function (status) {
+                res.send(status);
+            })
 
         }
         else {
@@ -153,6 +159,5 @@ module.exports = function (app) {
     //     var value = req.session[name];
     //     res.send(value);
     // }
-
 
 };

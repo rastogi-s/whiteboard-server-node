@@ -22,22 +22,22 @@ function findAllUsers() {
 
 
 function findUserById(userId) {
-    return userModel.findById(userId);
+    return userModel.findById(userId,{password:0});
 }
 
 function findUserByUsername(username) {
-    return userModel.findOne({username: username});
+    return userModel.findOne({username: username},{password: 0});
 }
 
 function findUserByCredentials(username, password) {
     return userModel.findOne({
         username: username, password: password
-    });
+    },{password: 0});
 }
 
 function createUser(user) {
     console.log(user);
-    return userModel.create(user);
+    return userModel.create(user,{password:0});
 }
 
 function deleteUser(userId) {
