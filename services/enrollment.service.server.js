@@ -21,7 +21,7 @@ module.exports = function (app) {
 
     // logged users
     app.post('/api/section/:kid/enroll', enrollStudent );
-    app.get('/api/studentsections', getSections );
+    app.get('/api/student/sections', getSections );
     app.delete('/api/section/:kid/unenroll', unEnrollStudent );
 
 
@@ -68,7 +68,9 @@ module.exports = function (app) {
             var sid = req.session['user']._id;
             enrollmentModel.findAllSectionsForStudent(sid)
                 .then(function (sections) {
+                    console.log(sections);
                     res.json(sections);
+
                 });
 
         } else {

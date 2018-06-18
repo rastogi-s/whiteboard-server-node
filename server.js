@@ -34,6 +34,8 @@ var sectionService = require('./services/section.service.server');
 sectionService(app);
 var enrollmentService = require('./services/enrollment.service.server');
 enrollmentService(app);
+var coursePrivacyService = require('./services/course-privacy.service.server');
+coursePrivacyService(app);
 
 
 // var session = require('express-session')

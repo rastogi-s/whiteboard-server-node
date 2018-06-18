@@ -11,8 +11,12 @@ module.exports = function (app) {
     var sectionModel =
         require('./../models/section/section.model.server');
 
+    var enrollmentModel =
+        require('./../models/enrollment/enrollment.model.server');
+
 
     app.get('/api/section/:sectionId', findSectionById);
+    app.get('/api/section', findAllSections);
     app.get('/api/course/:courseId/section', findAllSectionsForCourse);
 
     // admin access
@@ -39,6 +43,13 @@ module.exports = function (app) {
             });
     }
 
+    function findAllSections(req, res) {
+        sectionModel.findAllSections()
+            .then(function (section) {
+                res.json(section);
+            });
+    }
+
     function findSectionById(req, res) {
         var sectionId = req.params['sectionId'];
         console.log(sectionId);
@@ -52,6 +63,8 @@ module.exports = function (app) {
     function updateSection(req, res) {
         var sectionId = req.params['sectionId']
         var newSection = req.body;
+        console.log(newSection);
+        console.log(sectionId);
         sectionModel.updateSection(sectionId, newSection).then(
             function (status) {
                 res.send(status);
@@ -62,8 +75,10 @@ module.exports = function (app) {
 
     function deleteSection(req, res) {
         var sectionId = req.params['sectionId']
-        sectionModel.deleteSection(sectionId).then(function (status) {
-            res.send(status);
+        sectionModel.deleteSection(sectionId).then(() => {
+            enrollmentModel.removeAllStudentsFromSection(sectionId).then(
+                (status) => res.send(status))
+
         })
 
     }

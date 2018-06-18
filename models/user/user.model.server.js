@@ -37,7 +37,7 @@ function findUserByCredentials(username, password) {
 
 function createUser(user) {
     console.log(user);
-    return userModel.create(user,{password:0});
+    return userModel.create(user);
 }
 
 function deleteUser(userId) {

@@ -80,7 +80,7 @@ module.exports = function (app) {
                 res.json({status: false});
             } else {
                 userModel.createUser(user).then(function (user) {
-                    delete user.password;
+                    user.password = '';
                     req.session['user'] = user;
                     res.json({status: true});
                 })
@@ -91,6 +91,9 @@ module.exports = function (app) {
 
     function getProfile(req, res) {
         if (req.session && req.session['user']) {
+            console.log('check this');
+            console.log(req.session['user']);
+
             res.json(req.session['user']);
 
         } else {
