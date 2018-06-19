@@ -2,6 +2,6 @@ var mongoose = require('mongoose');
 var coursePrivacySchema = mongoose.Schema({
     courseId: String,
     mode: String,
-}, {collection: 'course-privacy'});
+}, {collection: 'courseprivacy'});
 
 module.exports = coursePrivacySchema;

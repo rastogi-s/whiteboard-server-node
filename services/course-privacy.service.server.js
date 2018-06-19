@@ -13,22 +13,24 @@ module.exports = function (app) {
 
 
     // faculty access
-    app.post('/api/course/:courseId/privacy',makeCoursePrivate );
+    app.post('/api/course/:courseId/privacy', makeCoursePrivate);
     app.get('/api/course/privacy', getAllPrivateCourses);
     app.delete('/api/course/:courseId/privacy', makeCoursePublic);
 
 
     function makeCoursePrivate(req, res) {
+        console.log('in private');
         var courseId = req.params['courseId'];
+        console.log(courseId);
         if (req.session && req.session['user']) {
-            var faculty = req.session['user'].username ;
-            if(faculty === 'faculty') {
-
-                coursePrivacyModel.makeCoursePrivate(courseId).
-                then(record => res.send(record));
+            var faculty = req.session['user'].username;
+            if (faculty === 'faculty') {
+                console.log(faculty);
+                coursePrivacyModel.makeCoursePrivate(courseId).then(record => res.send(record));
             }
             else {
-                res.send('Not a faculty');
+
+                res.send(null);
             }
         } else {
             res.send(null);
@@ -37,36 +39,25 @@ module.exports = function (app) {
     }
 
     function getAllPrivateCourses(req, res) {
-        if (req.session && req.session['user']) {
-            var faculty = req.session['user'].username ;
-            if(faculty === 'faculty') {
-
-                coursePrivacyModel.getAllPrivateCourses().
-                then(courses => res.json(courses));
-            }
-            else {
-                res.send('Not a faculty');
-            }
-        } else {
-            res.send('Not a faculty');
-        }
-
+        console.log('in get');
+        coursePrivacyModel.getAllPrivateCourses().
+        then(courses => res.json(courses));
     }
 
     function makeCoursePublic(req, res) {
+        console.log('in public');
         var courseId = req.params['courseId'];
         if (req.session && req.session['user']) {
-            var faculty = req.session['user'].username ;
-            if(faculty === 'faculty') {
+            var faculty = req.session['user'].username;
+            if (faculty === 'faculty') {
 
-                coursePrivacyModel.makeCoursePublic(courseId).
-                then(status => res.json(status));
+                coursePrivacyModel.makeCoursePublic(courseId).then(status => res.json(status));
             }
             else {
-                res.send('Not a faculty');
+                res.send(null);
             }
         } else {
-            res.send('Not a faculty');
+            res.send(null);
         }
 
     }
