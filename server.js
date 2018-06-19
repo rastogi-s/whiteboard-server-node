@@ -8,8 +8,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // require mongoose
+var connectionString = 'mongodb://127.0.0.1:27017/course-manager'; // for local
+if(process.env.MLAB_USERNAME) { // check if running remotely
+    var username = process.env.MLAB_USERNAME; // get from environment
+    var password = process.env.MLAB_PASSWORD;
+    connectionString = 'mongodb://' + username + ':' + password;
+    connectionString += '@ds163530.mlab.com:63530/heroku_q93w1q4z'; // user yours
+}
+
 var mongoose = require('mongoose');
-var global = mongoose.connect('mongodb://localhost/course-manager');
+var global = mongoose.connect(connectionString);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
