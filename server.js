@@ -78,5 +78,7 @@ coursePrivacyService(app);
 // app.get('/api/session/reset',
 //   resetSession);
 
-
-app.listen(5500);
+app.listen(process.env.PORT || 5500, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
+//app.listen(5500);
