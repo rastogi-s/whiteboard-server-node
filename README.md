@@ -17,4 +17,4 @@
    
 ### Notes:
 This repository also handles api calls from angular client application i.e. White-Board Angular Client<br>
-Github repository for the CWhite-Board Angular Client  application : `https://github.com/rastogi-s/whiteboard-client-angular`.
+Github repository for the White-Board Angular Client  application : `https://github.com/rastogi-s/whiteboard-client-angular`.
