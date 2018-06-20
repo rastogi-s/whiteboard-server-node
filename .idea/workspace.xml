@@ -32,11 +32,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.service.server.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user.service.server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/user.service.server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="80" column="20" lean-forward="true" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+            <state relative-caret-position="372">
+              <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="272">
+                <caret line="16" column="3" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -55,15 +67,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="237">
               <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="course-privacy.model.server.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/course-privacy/course-privacy.model.server.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="40" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -151,6 +154,7 @@
         <option value="$PROJECT_DIR$/services/course-privacy.service.server.js" />
         <option value="$PROJECT_DIR$/server,js.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -195,22 +199,6 @@
               <item name="whiteboard-middle-tier-node" type="b2602c69:ProjectViewProjectNode" />
               <item name="whiteboard-middle-tier-node" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="whiteboard-middle-tier-node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="whiteboard-middle-tier-node" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="whiteboard-middle-tier-node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="whiteboard-middle-tier-node" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="whiteboard-middle-tier-node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="whiteboard-middle-tier-node" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -231,6 +219,7 @@
       <recent name="C:\Users\shubh\Dropbox\WebDevSummer2018\whiteboard-middle-tier-node\models\user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\shubh\Dropbox\WebDevSummer2018\whiteboard-middle-tier-node" />
       <recent name="C:\Users\shubh\Dropbox\WebDevSummer2018\whiteboard-middle-tier-node\models\course-privacy" />
       <recent name="C:\Users\shubh\Dropbox\WebDevSummer2018\whiteboard-middle-tier-node\models\enrollment" />
       <recent name="C:\Users\shubh\Dropbox\WebDevSummer2018\whiteboard-middle-tier-node\models\section" />
@@ -263,12 +252,12 @@
       <updated>1528665576706</updated>
       <workItem from="1528665578043" duration="38204000" />
       <workItem from="1529014269668" duration="102000" />
-      <workItem from="1529074762461" duration="49828000" />
+      <workItem from="1529074762461" duration="51928000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88134000" />
+    <option name="totallyTimeSpent" value="90234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
@@ -537,8 +526,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/services/user.service.server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="80" column="20" lean-forward="true" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+        <state relative-caret-position="372">
+          <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="272">
+            <caret line="16" column="3" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
